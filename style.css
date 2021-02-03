@@ -23,6 +23,16 @@
     /* IE6-IE8 */ url("PlayfairDisplaySC-Black.ttf") format("truetype"); /* Safari, Android, iOS */
 }
 
+/* - - - - - - - - - - Variables - - - - - - - - - - */
+
+:root {
+  --color-0: #f7f7f7;
+  --color-1: #aaaaaa;
+  --color-2: #888888;
+  --color-3: #666666;
+  --color-4: #222222;
+}
+
 /* - - - - - - - - - - Font smoothing - - - - - - - - - - */
 * {
   -webkit-font-smoothing: antialiased;
@@ -48,6 +58,10 @@ body {
   /* width: 100vw; */
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+  color: #222222;
+  color: var(--color-4, #222222);
+  background-color: #222222;
+  background-color: var(--color-0, #f7f7f7);
 }
 /* - - - - - - - - - - Typography - - - - - - - - - - */
 /* - - - - - - - - - - Headings - - - - - - - - - - */
