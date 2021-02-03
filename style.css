@@ -1,0 +1,381 @@
+@font-face {
+  font-family: "Open Sans Light";
+  src: url("OpenSans-Light.ttf"); /* IE9 Compat Modes */
+  src: url("OpenSans-Light.ttf?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("OpenSans-Light.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: "Open Sans SemiBold";
+  src: url("OpenSans-SemiBold.ttf"); /* IE9 Compat Modes */
+  src: url("OpenSans-SemiBold.ttf?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("OpenSans-SemiBold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: "PlayFair Display SC Regular";
+  src: url("PlayfairDisplaySC-Regular.ttf"); /* IE9 Compat Modes */
+  src: url("PlayfairDisplaySC-Regular.ttf?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("PlayfairDisplaySC-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: "PlayFair Display SC Black";
+  src: url("PlayfairDisplaySC-Black.ttf"); /* IE9 Compat Modes */
+  src: url("PlayfairDisplaySC-Black.ttf?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("PlayfairDisplaySC-Black.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+/* - - - - - - - - - - Font smoothing - - - - - - - - - - */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  font-family: "Helvetica", Arial, sans-serif;
+  font-size: 16px;
+  font-size: clamp(16px, 2vmin, 32px);
+  font-weight: 200;
+  text-align: right;
+  margin: 0;
+}
+body {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* width: 100vw; */
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+/* - - - - - - - - - - Typography - - - - - - - - - - */
+/* - - - - - - - - - - Headings - - - - - - - - - - */
+h1 {
+  font-family: "Helvetica";
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+h2 {
+  font-family: "Helvetica";
+  font-size: 2.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-family: "Helvetica";
+  font-size: 2rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+h4 {
+  font-family: "Helvetica";
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+h5 {
+  font-family: "Helvetica";
+  font-size: 1.2rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+h6 {
+  font-family: "Helvetica";
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+/* - - - - - - - - - - Body Text - - - - - - - - - - */
+p {
+  font-size: 1rem;
+}
+blockquote,
+blockquote p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* - - - - - - - - - - Lists - - - - - - - - - - */
+/* - - - - - - - - - - Definitions - - - - - - - - - - */
+dl {
+  font-size: 1rem;
+} /* Definition List */
+dt {
+  font-size: 1rem;
+} /* Definition List Title */
+dd {
+  font-size: 1rem;
+} /* Definition List Division */
+
+/* - - - - - - - - - - List Elements - - - - - - - - - - */
+li {
+  font-size: 1rem;
+}
+
+/* - - - - - - - - - - Ordered Lists - - - - - - - - - - */
+ol {
+  font-size: 1rem;
+}
+ol li {
+  font-size: 1rem;
+}
+
+/* - - - - - - - - - - Unordered Lists - - - - - - - - - - */
+ul {
+  font-size: 1rem;
+}
+ul li {
+  font-size: 1rem;
+}
+
+/* - - - - - - - - - - Horizontal Rules - - - - - - - - - - */
+hr {
+  display: block;
+}
+
+/* - - - - - - - - - - Tables - - - - - - - - - - */
+table {
+}
+tr {
+}
+td {
+}
+caption {
+} /*Table Caption */
+thead {
+} /* Table Header */
+tfoot {
+} /* Table Footer */
+th {
+} /* Tabel Header/Footer Data */
+
+/* - - - - - - - - - - Text formatting - - - - - - - - - - */
+/* - - - - - - - - - - Keyboard input - - - - - - - - - - */
+kbd {
+}
+/* - - - - - - - - - - Inline Code - - - - - - - - - - */
+code {
+}
+/* - - - - - - - - - - Preformatted Text - - - - - - - - - - */
+pre {
+}
+/* - - - - - - - - - - Inline elements - - - - - - - - - - */
+a {
+} /* Link */
+a:visited {
+} /* Link Visited */
+a:focus {
+} /* Link Focused */
+strong {
+} /* Strong */
+em {
+} /* Emphasis */
+b {
+} /* Bold */
+i {
+} /* Italics */
+u {
+} /* Underline */
+del {
+} /* Deleted */
+ins {
+} /* Inserted */
+s {
+} /* Strikethrough */
+sup {
+} /* Superscript */
+sub {
+} /* Subscript */
+small {
+} /* Small Script */
+abbr {
+} /* Abbreviation */
+q {
+} /* Quotation */
+cite {
+  font-size: 0.8rem;
+  font-weight: 400;
+} /* Citation */
+dfn {
+} /* Definition */
+mark {
+} /* Marked Text */
+var {
+} /* Variable */
+time {
+} /* Time */
+
+/* - - - - - - - - - - Images, Audio, Video - - - - - - - - - - */
+img {
+  max-width: 100%;
+}
+figure {
+}
+figcaption {
+}
+audio {
+}
+video {
+}
+canvas {
+}
+meter {
+}
+progress {
+}
+svg {
+}
+iframe {
+}
+
+/* - - - - - - - - - - Form Elements - - - - - - - - - - */
+/* - - - - - - - - - - Inputs - - - - - - - - - - */
+input {
+}
+input[type="text"] {
+}
+input[type="password"] {
+}
+input[type="url"] {
+}
+input[type="email"] {
+}
+input[type="tel"] {
+}
+input[type="search"] {
+}
+input[type="number"] {
+}
+
+/* - - - - - - - - - - Select Menu - - - - - - - - - - */
+select {
+}
+select option {
+}
+
+/* - - - - - - - - - - Checkboxes & Radio - - - - - - - - - - */
+fieldset {
+}
+input[type="checkbox"] {
+}
+input[type="radio"] {
+}
+
+/* - - - - - - - - - - Text Area - - - - - - - - - - */
+textarea {
+}
+
+/* - - - - - - - - - - HTML5 Inputs - - - - - - - - - - */
+input[type="color"] {
+}
+input[type="number"] {
+}
+input[type="range"] {
+}
+input[type="date"] {
+}
+input[type="month"] {
+}
+input[type="week"] {
+}
+input[type="datetime"] {
+}
+input[type="datetime-local"] {
+}
+
+/* - - - - - - - - - - Action Buttons - - - - - - - - - - */
+input[type="submit"] {
+}
+input[type="button"] {
+}
+input[type="reset"] {
+}
+input[disabled] {
+}
+button[type="submit"] {
+}
+button[type="button"] {
+}
+button[type="reset"] {
+}
+button[disabled] {
+}
+
+/* - - - - - - - - - - Page Structure - - - - - - - - - - */
+header {
+}
+footer {
+}
+section {
+}
+article {
+}
+
+/* - - - - - - - - - - Custom Classes - - - - - - - - - - */
+.countdown-h1 {
+  position: absolute;
+  visibility: hidden;
+}
+#countdown-container {
+  width: 100%;
+}
+
+/* - - - - - - - - - - Responsiveness Media Queries - - - - - - - - - - */
+
+/* Intelligent breakpoints from mobile to very large desktop - CSS Version
+Original article: https://www.freecodecamp.org/news/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862/ */
+
+/* Portrait Phones upwards
+/*-------------------------------------------------- */
+@media (max-width: 599px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Portrait Tablets upwards
+/*-------------------------------------------------- */
+@media (min-width: 600px) {
+  html,
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Landscape Tablets upwards
+/*-------------------------------------------------- */
+@media (min-width: 900px) {
+  html,
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Desktop upwards
+/*-------------------------------------------------- */
+@media (min-width: 1200px) {
+  html,
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Large Desktop upwards
+/*-------------------------------------------------- */
+@media (min-width: 1800px) {
+  html,
+  body {
+    font-size: 20px;
+  }
+}
+
+/* - - - - - - - - - - Super-Responsiveness - vMin/vMax - - - - - - - - - - */
+@supports (font-size: clamp(16px, 2vmin, 32px)) {
+  html,
+  body {
+    font-size: clamp(16px, 2vmin, 32px) !important;
+  }
+}
