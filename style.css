@@ -335,6 +335,10 @@ article {
 #countdown-container {
   width: 100%;
 }
+.cd-num {
+  font-size: 3rem;
+  font-weight: 800;
+}
 
 /* - - - - - - - - - - Responsiveness Media Queries - - - - - - - - - - */
 
