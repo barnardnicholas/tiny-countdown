@@ -338,6 +338,10 @@ article {
 .cd-num {
   font-size: 3rem;
   font-weight: 800;
+  line-height: 1em;
+}
+.cd-lab {
+  line-height: 1em;
 }
 
 /* - - - - - - - - - - Responsiveness Media Queries - - - - - - - - - - */
