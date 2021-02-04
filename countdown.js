@@ -96,7 +96,7 @@ const updateCountdown = () => {
   const mins = time.mins || 0;
   const secs = time.secs || 0;
 
-  if (weeks || ms > msVals.week) {
+  if (weeks || timeOffset > msVals.week) {
     cdSectWeeks.style.display = "initial";
     cdWeeks.innerText = weeks;
     if (weeks > 1) cdLabWeeks.innerText = "weeks";
@@ -105,7 +105,7 @@ const updateCountdown = () => {
     cdSectWeeks.style.display = "none";
   }
 
-  if (days || ms > msVals.day) {
+  if (days || timeOffset > msVals.day) {
     cdSectDays.style.display = "initial";
     cdDays.innerText = days;
     if (days > 1) cdLabDays.innerText = "days";
@@ -114,7 +114,7 @@ const updateCountdown = () => {
     cdSectDays.style.display = "none";
   }
 
-  if (hours || ms > msVals.hour) {
+  if (hours || timeOffset > msVals.hour) {
     cdSectHours.style.display = "initial";
     cdHours.innerText = hours;
     if (hours > 1) cdLabHours.innerText = "hours";
@@ -123,7 +123,7 @@ const updateCountdown = () => {
     cdSectHours.style.display = "none";
   }
 
-  if (mins || ms > msVals.min) {
+  if (mins || timeOffset > msVals.min) {
     cdSectMins.style.display = "initial";
     cdMins.innerText = mins;
     if (mins > 1) cdLabMins.innerText = "minutes";
@@ -132,7 +132,7 @@ const updateCountdown = () => {
     cdSectMins.style.display = "none";
   }
 
-  if (secs || ms > msVals.sec) {
+  if (secs || timeOffset > msVals.sec) {
     cdSectSecs.style.display = "initial";
     cdSecs.innerText = secs;
     if (secs > 1) cdLabSecs.innerText = "seconds";
