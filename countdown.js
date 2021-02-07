@@ -1,7 +1,7 @@
 // Values LUT
 const msVals = {
-  // year: 0,
-  // month: 0,
+  year: 0,
+  month: 0,
   week: 604800000,
   day: 86400000,
   hour: 3600000,
@@ -60,6 +60,62 @@ const timeFromMS = (ms) => {
   }
 };
 
+const cdData = {
+  years: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.year,
+  },
+  months: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.month,
+  },
+  weeks: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.week,
+  },
+  days: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.day,
+  },
+  hours: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.hour,
+  },
+  mins: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.min,
+  },
+  secs: {
+    sect: null,
+    num: null,
+    lab: null,
+    ms: msVals.sec,
+  },
+};
+
+const initCdData = () => {
+  const keys = Object.keys(cdData) || [];
+  keys.forEach((key) => {
+    cdData[key].sect = document.getElementById(`cd-sect-${key}`);
+    cdData[key].num = document.getElementById(`cd-num-${key}`);
+    cdData[key].lab = document.getElementById(`cd-lab-${key}`);
+  });
+};
+
+initCdData();
+
 // const cdSectYears = document.getElementById("cd-sect-years");
 // const cdSectMonths = document.getElementById("cd-sect-months");
 const cdSectWeeks = document.getElementById("cd-sect-weeks");
@@ -97,54 +153,54 @@ const updateCountdown = () => {
   const secs = time.secs || 0;
 
   if (weeks || timeOffset > msVals.week) {
-    cdSectWeeks.style.display = "initial";
-    cdWeeks.innerText = weeks;
-    if (weeks > 1) cdLabWeeks.innerText = "weeks";
-    else cdLabWeeks.innerText = "week";
+    cdData.weeks.sect.style.display = "initial";
+    cdData.weeks.num.innerText = weeks;
+    if (weeks > 1) cdData.weeks.lab.innerText = "weeks";
+    else cdData.weeks.lab.innerText = "week";
   } else {
-    cdSectWeeks.style.display = "none";
+    cdData.weeks.sect.style.display = "none";
   }
 
   if (days || timeOffset > msVals.day) {
-    cdSectDays.style.display = "initial";
-    cdDays.innerText = days;
-    if (days > 1) cdLabDays.innerText = "days";
-    else cdLabDays.innerText = "day";
+    cdData.days.sect.style.display = "initial";
+    cdData.days.num.innerText = days;
+    if (days > 1) cdData.days.lab.innerText = "days";
+    else cdData.days.lab.innerText = "day";
   } else {
-    cdSectDays.style.display = "none";
+    cdData.days.sect.style.display = "none";
   }
 
   if (hours || timeOffset > msVals.hour) {
-    cdSectHours.style.display = "initial";
-    cdHours.innerText = hours;
-    if (hours > 1) cdLabHours.innerText = "hours";
-    else cdLabHours.innerText = "hour";
+    cdData.hours.sect.style.display = "initial";
+    cdData.hours.num.innerText = hours;
+    if (hours > 1) cdData.hours.lab.innerText = "hours";
+    else cdData.hours.lab.innerText = "hour";
   } else {
-    cdSectHours.style.display = "none";
+    cdData.hours.sect.style.display = "none";
   }
 
   if (mins || timeOffset > msVals.min) {
-    cdSectMins.style.display = "initial";
-    cdMins.innerText = mins;
-    if (mins > 1) cdLabMins.innerText = "minutes";
-    else cdLabMins.innerText = "minute";
+    cdData.mins.sect.style.display = "initial";
+    cdData.mins.num.innerText = mins;
+    if (mins > 1) cdData.mins.lab.innerText = "minutes";
+    else cdData.mins.lab.innerText = "minute";
   } else {
-    cdSectMins.style.display = "none";
+    cdData.mins.sect.style.display = "none";
   }
 
   if (secs || timeOffset > msVals.sec) {
-    cdSectSecs.style.display = "initial";
-    cdSecs.innerText = secs;
-    if (secs > 1) cdLabSecs.innerText = "seconds";
-    else cdLabSecs.innerText = "second";
+    cdData.secs.sect.style.display = "initial";
+    cdData.secs.num.innerText = secs;
+    if (secs > 1) cdData.secs.lab.innerText = "seconds";
+    else cdData.secs.lab.innerText = "second";
   } else {
-    cdSectSecs.style.display = "none";
+    cdData.secs.sect.style.display = "none";
   }
 
-  cdDays.innerText = days;
-  cdHours.innerText = hours;
-  cdMins.innerText = mins;
-  cdSecs.innerText = secs;
+  cdData.days.num.innerText = days;
+  cdData.hours.num.innerText = hours;
+  cdData.mins.num.innerText = mins;
+  cdData.secs.num.innerText = secs;
 };
 
 const now = new Date();
