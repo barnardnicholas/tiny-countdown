@@ -118,27 +118,27 @@ initCdData();
 
 // const cdSectYears = document.getElementById("cd-sect-years");
 // const cdSectMonths = document.getElementById("cd-sect-months");
-const cdSectWeeks = document.getElementById("cd-sect-weeks");
-const cdSectDays = document.getElementById("cd-sect-days");
-const cdSectHours = document.getElementById("cd-sect-hours");
-const cdSectMins = document.getElementById("cd-sect-mins");
-const cdSectSecs = document.getElementById("cd-sect-secs");
+// const cdSectWeeks = document.getElementById("cd-sect-weeks");
+// const cdSectDays = document.getElementById("cd-sect-days");
+// const cdSectHours = document.getElementById("cd-sect-hours");
+// const cdSectMins = document.getElementById("cd-sect-mins");
+// const cdSectSecs = document.getElementById("cd-sect-secs");
 
 // const cdYears = document.getElementById("cd-num-years");
 // const cdMonths = document.getElementById("cd-num-months");
-const cdWeeks = document.getElementById("cd-num-weeks");
-const cdDays = document.getElementById("cd-num-days");
-const cdHours = document.getElementById("cd-num-hours");
-const cdMins = document.getElementById("cd-num-mins");
-const cdSecs = document.getElementById("cd-num-secs");
+// const cdWeeks = document.getElementById("cd-num-weeks");
+// const cdDays = document.getElementById("cd-num-days");
+// const cdHours = document.getElementById("cd-num-hours");
+// const cdMins = document.getElementById("cd-num-mins");
+// const cdSecs = document.getElementById("cd-num-secs");
 
 // const cdLabYears = document.getElementById("cd-lab-years");
 // const cdSectMonths = document.getElementById("cd-lab-months");
-const cdLabWeeks = document.getElementById("cd-lab-weeks");
-const cdLabDays = document.getElementById("cd-lab-days");
-const cdLabHours = document.getElementById("cd-lab-hours");
-const cdLabMins = document.getElementById("cd-lab-mins");
-const cdLabSecs = document.getElementById("cd-lab-secs");
+// const cdLabWeeks = document.getElementById("cd-lab-weeks");
+// const cdLabDays = document.getElementById("cd-lab-days");
+// const cdLabHours = document.getElementById("cd-lab-hours");
+// const cdLabMins = document.getElementById("cd-lab-mins");
+// const cdLabSecs = document.getElementById("cd-lab-secs");
 
 const updateCountdown = () => {
   const now = new Date();
@@ -215,7 +215,7 @@ console.log(now.getTimezoneOffset());
 // On window load
 window.onLoad = (event) => {};
 
-const testTime = 1612377349733 + 86400000;
+const testTime = now.getTime() + 86400000;
 console.log(`Test time (MS): ${testTime}`);
 const transTestTime = timeFromMS(testTime);
 console.log(`Translated:`);
