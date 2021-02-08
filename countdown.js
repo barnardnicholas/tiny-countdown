@@ -1,14 +1,3 @@
-// Values LUT
-const msVals = {
-  year: 0,
-  month: 0,
-  week: 604800000,
-  day: 86400000,
-  hour: 3600000,
-  min: 60000,
-  sec: 1000,
-};
-
 // Queries
 const ezQuery = () => {
   // Get URL query
@@ -43,70 +32,87 @@ const updateViewport = () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 };
 
+// Assemble time object from MS
 const timeFromMS = (ms) => {
   try {
-    let weeks = Math.floor(ms / msVals.week);
-    let weeksRem = ms % msVals.week;
-    let days = Math.floor(weeksRem / msVals.day);
-    let daysRem = weeksRem % msVals.day;
-    let hours = Math.floor(daysRem / msVals.hour);
-    let hoursRem = daysRem % msVals.hour;
-    let mins = Math.floor(hoursRem / msVals.min);
-    let minsRem = hoursRem % msVals.min;
-    let secs = Math.floor(minsRem / msVals.sec);
+    let weeks = Math.floor(ms / cdData.weeks.ms);
+    let weeksRem = ms % cdData.weeks.ms;
+    let days = Math.floor(weeksRem / cdData.days.ms);
+    let daysRem = weeksRem % cdData.days.ms;
+    let hours = Math.floor(daysRem / cdData.hours.ms);
+    let hoursRem = daysRem % cdData.hours.ms;
+    let mins = Math.floor(hoursRem / cdData.mins.ms);
+    let minsRem = hoursRem % cdData.mins.ms;
+    let secs = Math.floor(minsRem / cdData.secs.ms);
     return { weeks, days, hours, mins, secs };
   } catch (e) {
     console.error(e);
   }
 };
 
+// Data for DOM Elements
 const cdData = {
   years: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.year,
+    ms: 31557600000,
+    sing: "year",
+    plur: "years"
   },
   months: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.month,
+    ms: 2592000000,
+    sing: "month",
+    plur: "months"
   },
   weeks: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.week,
+    ms: 604800000,
+    sing: "week",
+    plur: "weeks"
   },
   days: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.day,
+    ms: 86400000,
+    sing: "day",
+    plur: "days"
   },
   hours: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.hour,
+    ms: 3600000,
+    sing: "hour",
+    plur: "hours"
   },
   mins: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.min,
+    ms: 60000,
+    sing: "minute",
+    plur: "minutes"
   },
   secs: {
     sect: null,
     num: null,
     lab: null,
-    ms: msVals.sec,
+    ms: 1000,
+    sing: "second",
+    plur: "seconds"
   },
 };
+// cdData keys for iteration
+const keys = Object.keys(cdData) || [];
 
 const initCdData = () => {
-  const keys = Object.keys(cdData) || [];
   keys.forEach((key) => {
     cdData[key].sect = document.getElementById(`cd-sect-${key}`);
     cdData[key].num = document.getElementById(`cd-num-${key}`);
@@ -116,91 +122,25 @@ const initCdData = () => {
 
 initCdData();
 
-// const cdSectYears = document.getElementById("cd-sect-years");
-// const cdSectMonths = document.getElementById("cd-sect-months");
-// const cdSectWeeks = document.getElementById("cd-sect-weeks");
-// const cdSectDays = document.getElementById("cd-sect-days");
-// const cdSectHours = document.getElementById("cd-sect-hours");
-// const cdSectMins = document.getElementById("cd-sect-mins");
-// const cdSectSecs = document.getElementById("cd-sect-secs");
-
-// const cdYears = document.getElementById("cd-num-years");
-// const cdMonths = document.getElementById("cd-num-months");
-// const cdWeeks = document.getElementById("cd-num-weeks");
-// const cdDays = document.getElementById("cd-num-days");
-// const cdHours = document.getElementById("cd-num-hours");
-// const cdMins = document.getElementById("cd-num-mins");
-// const cdSecs = document.getElementById("cd-num-secs");
-
-// const cdLabYears = document.getElementById("cd-lab-years");
-// const cdSectMonths = document.getElementById("cd-lab-months");
-// const cdLabWeeks = document.getElementById("cd-lab-weeks");
-// const cdLabDays = document.getElementById("cd-lab-days");
-// const cdLabHours = document.getElementById("cd-lab-hours");
-// const cdLabMins = document.getElementById("cd-lab-mins");
-// const cdLabSecs = document.getElementById("cd-lab-secs");
-
 const updateCountdown = () => {
   const now = new Date();
   let timeOffset = ezQuery().t - now.getTime();
   const time = timeFromMS(timeOffset);
-  // const years = dateToShow.getYear() || "00";
-  // const months = dateToShow.getMonth() + 1 || "00";
-  const weeks = time.weeks || 0;
-  const days = time.days || 0;
-  const hours = time.hours || 0;
-  const mins = time.mins || 0;
-  const secs = time.secs || 0;
 
-  if (weeks || timeOffset > msVals.week) {
-    cdData.weeks.sect.style.display = "initial";
-    cdData.weeks.num.innerText = weeks;
-    if (weeks > 1) cdData.weeks.lab.innerText = "weeks";
-    else cdData.weeks.lab.innerText = "week";
-  } else {
-    cdData.weeks.sect.style.display = "none";
-  }
-
-  if (days || timeOffset > msVals.day) {
-    cdData.days.sect.style.display = "initial";
-    cdData.days.num.innerText = days;
-    if (days > 1) cdData.days.lab.innerText = "days";
-    else cdData.days.lab.innerText = "day";
-  } else {
-    cdData.days.sect.style.display = "none";
-  }
-
-  if (hours || timeOffset > msVals.hour) {
-    cdData.hours.sect.style.display = "initial";
-    cdData.hours.num.innerText = hours;
-    if (hours > 1) cdData.hours.lab.innerText = "hours";
-    else cdData.hours.lab.innerText = "hour";
-  } else {
-    cdData.hours.sect.style.display = "none";
-  }
-
-  if (mins || timeOffset > msVals.min) {
-    cdData.mins.sect.style.display = "initial";
-    cdData.mins.num.innerText = mins;
-    if (mins > 1) cdData.mins.lab.innerText = "minutes";
-    else cdData.mins.lab.innerText = "minute";
-  } else {
-    cdData.mins.sect.style.display = "none";
-  }
-
-  if (secs || timeOffset > msVals.sec) {
-    cdData.secs.sect.style.display = "initial";
-    cdData.secs.num.innerText = secs;
-    if (secs > 1) cdData.secs.lab.innerText = "seconds";
-    else cdData.secs.lab.innerText = "second";
-  } else {
-    cdData.secs.sect.style.display = "none";
-  }
-
-  cdData.days.num.innerText = days;
-  cdData.hours.num.innerText = hours;
-  cdData.mins.num.innerText = mins;
-  cdData.secs.num.innerText = secs;
+  keys.forEach(key => {
+    try {
+      if (time[key] || timeOffset > cdData[key]["ms"]) {
+        cdData[key]["sect"]["style"]["display"] = "initial";
+        cdData[key]["num"]["innerText"] = time[key];
+        if (time[key] > 1) cdData[key]["lab"]["innerText"] = cdData[key]["plur"];
+        else cdData[key]["lab"]["innerText"] = cdData[key]["sing"];
+      } else {
+        cdData[key]["sect"]["style"]["display"] = "none";
+      } 
+    } catch {
+      return;
+    }
+  })
 };
 
 const now = new Date();
@@ -220,6 +160,7 @@ console.log(`Test time (MS): ${testTime}`);
 const transTestTime = timeFromMS(testTime);
 console.log(`Translated:`);
 console.dir(transTestTime);
+
 
 let timeOffset = ezQuery().t - now.getTime();
 
