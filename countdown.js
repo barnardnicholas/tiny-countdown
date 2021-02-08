@@ -143,10 +143,12 @@ const handleToggleForm = (e) => {
   if (formContainer.classList.contains("toggle-on")) {
     formContainer.style.height = "0";
     formContainer.classList.remove("toggle-on")
+    floatingActionButton.innerText = "+"
   }
   else {
     formContainer.style.height = "unset"; 
     formContainer.classList.add("toggle-on")
+    floatingActionButton.innerText = "-"
   }
 }
 
