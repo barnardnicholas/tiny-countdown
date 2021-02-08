@@ -3,14 +3,12 @@ const ezQuery = () => {
   // Get URL query
   const queryString = location.search;
   const urlParams = new URLSearchParams(queryString);
-
   // Utils
   // Convert to integer if necessary
   const detectInteger = (item) => {
     if (Number.isInteger(parseInt(item))) return parseInt(item);
     else return item;
   };
-
   // Assemble Query Object
   const queryObj = {};
   for (let pair of urlParams.entries()) {
@@ -120,8 +118,6 @@ const initCdData = () => {
   });
 };
 
-initCdData();
-
 const updateCountdown = () => {
   const now = new Date();
   let timeOffset = ezQuery().t - now.getTime();
@@ -143,6 +139,8 @@ const updateCountdown = () => {
   })
 };
 
+initCdData();
+
 const now = new Date();
 // MS UTC
 console.log(now.getTime());
@@ -161,12 +159,16 @@ const transTestTime = timeFromMS(testTime);
 console.log(`Translated:`);
 console.dir(transTestTime);
 
+const debugLink = document.getElementById("debug-link-cd");
+debugLink.href = `/?t=${now.getTime() + 86400000}`
+
 
 let timeOffset = ezQuery().t - now.getTime();
 
 updateViewport();
 
 updateCountdown();
+
 setInterval(() => {
   updateCountdown();
 }, 1000);

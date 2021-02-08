@@ -8,15 +8,21 @@
   </head>
   <body>
     <h1 id="countdown-h1"></h1>
+    <div>
+      <a href="/" id="debug-link-home">Goto Home</a>
+    </div>
+    <div>
+      <a href="#" id="debug-link-cd">Goto Test Countdown</a>
+    </div>
     <div id="countdown-container">
-      <!-- <section class="cd-sect" id="cd-sect-years">
+      <section class="cd-sect" id="cd-sect-years">
         <div class="cd-num" id="cd-num-years">00</div>
         <div class="cd-lab" id="cd-lab-years">years</div>
       </section>
       <section class="cd-sect" id="cd-sect-months">
         <div class="cd-num" id="cd-num-months">00</div>
         <div class="cd-lab" id="cd-lab-months">months</div>
-      </section> -->
+      </section>
       <section class="cd-sect" id="cd-sect-weeks">
         <div class="cd-num" id="cd-num-weeks">00</div>
         <div class="cd-lab" id="cd-lab-weeks">weeks</div>
@@ -38,6 +44,19 @@
         <div class="cd-lab" id="cd-lab-secs">seconds</div>
       </section>
     </div>
+    <footer>
+      <span>
+        <div id="cd-form-container">
+          <form>
+            <input type="date">
+            <input type="time">
+            <input value="Go" type="submit">
+          </form>
+        </div>
+      </span>
+  </footer>
+  <button class="cd-form-toggle floating-action-button">+</button>
+
     <script type="text/javascript" src="countdown.js"></script>
   </body>
 </html>
