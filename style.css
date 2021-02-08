@@ -358,7 +358,7 @@ div#cd-form-container {
   transition: all 0.3s ease;
   overflow-y: hidden;
 }
-.floating-action-button {
+#floating-action-button {
   position: fixed;
   left: 1rem;
   bottom: 1rem;

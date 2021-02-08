@@ -139,6 +139,17 @@ const updateCountdown = () => {
   })
 };
 
+const handleToggleForm = (e) => {
+  if (formContainer.classList.contains("toggle-on")) {
+    formContainer.style.height = "0";
+    formContainer.classList.remove("toggle-on")
+  }
+  else {
+    formContainer.style.height = "unset"; 
+    formContainer.classList.add("toggle-on")
+  }
+}
+
 initCdData();
 
 const now = new Date();
@@ -166,6 +177,10 @@ debugLink.href = `/?t=${now.getTime() + 86400000}`
 let timeOffset = ezQuery().t - now.getTime();
 
 updateViewport();
+
+const formContainer = document.getElementById("cd-form-container");
+const floatingActionButton = document.getElementById("floating-action-button");
+floatingActionButton.addEventListener("click", handleToggleForm);
 
 updateCountdown();
 
