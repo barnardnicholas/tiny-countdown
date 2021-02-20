@@ -185,7 +185,6 @@ const updateCountdown = () => {
   const now = new Date();
   let timeOffset = ezQuery().t - now.getTime();
   const time = timeFromMS(timeOffset);
-
   keys.forEach(key => {
     try {
       if (time[key] || timeOffset > cdData[key]["ms"]) {
@@ -201,6 +200,17 @@ const updateCountdown = () => {
     }
   })
 };
+
+const endCountdown = () => {
+  countdown = null;
+  keys.forEach(key => {
+    try {
+        cdData[key]["sect"]["style"]["display"] = "none";
+    } catch {
+      return;
+    }
+  })
+}
 
 const handleToggleForm = (e) => {
   if (formContainer.classList.contains("toggle-on")) {
@@ -253,6 +263,11 @@ form.addEventListener("submit", handleFormSubmit)
 
 updateCountdown();
 
-setInterval(() => {
-  updateCountdown();
+let countdown;
+
+countdown = setInterval(() => {
+    const now = new Date();
+    let timeOffset = ezQuery().t - now.getTime();
+    if (timeOffset > 0) updateCountdown();
+    else endCountdown();
 }, 1000);
