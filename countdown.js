@@ -114,6 +114,11 @@ const cdData = {
 // cdData keys for iteration
 const keys = Object.keys(cdData) || [];
 
+// Form input elements
+const form = document.getElementById("cd-form");
+const formDate = document.getElementById("cd-form-date");
+const formTime = document.getElementById("cd-form-time");
+
 // Form values - defaults to 1 year in the future
 let formValues = {
   year: now.getFullYear() + 1,
@@ -122,7 +127,10 @@ let formValues = {
   hour: now.getHours(),
   min: now.getMinutes()
 }
-console.log(formValues);
+
+// Set form input 'min' attributes
+formDate.setAttribute("min", `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`)
+// formTime.setAttribute("min", `${now.getHours()}:${now.getMinutes()}`)
 
 // Change handler for form inputs - store to varaibles
 const updateFormValues = (e) => {
@@ -136,6 +144,33 @@ const updateFormValues = (e) => {
     console.error(err);
   }
 };
+
+const validateForm = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      if (!formDate.value || !formTime.value) reject({error: "All fields must be filled out."})
+      const { year, month, day, hour, min } = formValues;
+      const targetDate = new Date(year, month - 1, day, hour, min).getTime();
+      const rightNow = new Date().getTime();
+      if (targetDate - rightNow <= 0) reject({error: "Target date must be in the future."})
+      else resolve({targetDate})
+    } catch(e) {
+      console.error(e)
+      reject({error: e})
+    }
+  })
+}
+
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  validateForm()
+  .then((res) => {
+    console.log(res)
+    window.location.assign(`?t=${res.targetDate}`)
+  }).catch((res) => {
+    console.log(res)
+  });
+}
 
 // Assign DOM elements to cdData
 const initCdData = () => {
@@ -183,21 +218,21 @@ const handleToggleForm = (e) => {
 initCdData();
 
 // MS UTC
-console.log(now.getTime());
-console.log(new Date(now.getTime()));
-console.log(now.toLocaleTimeString());
+// console.log(now.getTime());
+// console.log(new Date(now.getTime()));
+// console.log(now.toLocaleTimeString());
 
 // Timezone offset in minutes
-console.log(now.getTimezoneOffset());
+// console.log(now.getTimezoneOffset());
 
 // On window load
-window.onLoad = (event) => {};
+document.onLoad = (e) => {};
 
 const testTime = now.getTime() + 86400000;
-console.log(`Test time (MS): ${testTime}`);
+// console.log(`Test time (MS): ${testTime}`);
 const transTestTime = timeFromMS(testTime);
-console.log(`Translated:`);
-console.dir(transTestTime);
+// console.log(`Translated:`);
+// console.dir(transTestTime);
 
 const debugLink = document.getElementById("debug-link-cd");
 debugLink.href = `/?t=${now.getTime() + 86400000}`
@@ -210,10 +245,11 @@ updateViewport();
 const formContainer = document.getElementById("cd-form-container");
 const floatingActionButton = document.getElementById("floating-action-button");
 floatingActionButton.addEventListener("click", handleToggleForm);
-const formDate = document.getElementById("cd-form-date");
-const formTime = document.getElementById("cd-form-time");
+
 formDate.addEventListener("change", updateFormValues);
 formTime.addEventListener("change", updateFormValues);
+form.addEventListener("submit", handleFormSubmit)
+
 
 updateCountdown();
 
