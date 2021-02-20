@@ -353,10 +353,22 @@ article {
 .cd-lab {
   line-height: 1em;
 }
+#cd-sect-end {
+  display: none;
+}
+#cd-num-end,
+#cd-lab-end {
+  text-align: center;
+}
 div#cd-form-container {
   height: 0;
   transition: all 0.3s ease;
   overflow-y: hidden;
+}
+#cd-form-feedback {
+  padding: 0.5em 0;
+  font-size: 0.8rem;
+  display: none;
 }
 #floating-action-button {
   position: fixed;

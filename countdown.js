@@ -51,6 +51,15 @@ const timeFromMS = (ms) => {
 // Define now
 const now = new Date();
 
+// Form values - defaults to 1 year in the future
+let formValues = {
+  year: now.getFullYear() + 1,
+  month: now.getMonth() + 1,
+  day: now.getDate(),
+  hour: now.getHours(),
+  min: now.getMinutes()
+}
+
 // Data for DOM Elements
 const cdData = {
   years: {
@@ -114,32 +123,36 @@ const cdData = {
 // cdData keys for iteration
 const keys = Object.keys(cdData) || [];
 
-// Form input elements
+// Define page elements
+const floatingActionButton = document.getElementById("floating-action-button");
+const formContainer = document.getElementById("cd-form-container");
 const form = document.getElementById("cd-form");
 const formDate = document.getElementById("cd-form-date");
 const formTime = document.getElementById("cd-form-time");
+const formFeedback = document.getElementById("cd-form-feedback");
+const endSect = document.getElementById("cd-sect-end");
+const endText = document.getElementById("cd-num-end");
+const endLab = document.getElementById("cd-lab-end");
 
-// Form values - defaults to 1 year in the future
-let formValues = {
-  year: now.getFullYear() + 1,
-  month: now.getMonth() + 1,
-  day: now.getDate(),
-  hour: now.getHours(),
-  min: now.getMinutes()
-}
+// Assign DOM elements to cdData
+const initCdData = () => {
+  keys.forEach((key) => {
+    cdData[key].sect = document.getElementById(`cd-sect-${key}`);
+    cdData[key].num = document.getElementById(`cd-num-${key}`);
+    cdData[key].lab = document.getElementById(`cd-lab-${key}`);
+  });
+};
 
 // Set form input 'min' attributes
 formDate.setAttribute("min", `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`)
 // formTime.setAttribute("min", `${now.getHours()}:${now.getMinutes()}`)
 
 // Change handler for form inputs - store to varaibles
-const updateFormValues = (e) => {
-  console.log(e);
+const updateFormValues = () => {
   try {
     const [year, month, day] = formDate.value.split("-");
     const [hour, min] = formTime.value.split(":");
     formValues = { year: year || formValues.year, month: month || formValues.month, day: day || formValues.day, hour: hour || formValues.hour, min: min || formValues.min };
-    console.log(formValues)
   } catch(err) {
     console.error(err);
   }
@@ -162,29 +175,27 @@ const validateForm = () => {
 }
 
 const handleFormSubmit = (e) => {
+  // Prevent default form behaviour
   e.preventDefault();
+  // Form validation
   validateForm()
   .then((res) => {
     console.log(res)
+    formFeedback.style.display = "none";
     window.location.assign(`?t=${res.targetDate}`)
   }).catch((res) => {
-    console.log(res)
+    console.warn(res)
+    formFeedback.innerText = res.error;
+    formFeedback.style.display = "initial";
   });
 }
 
-// Assign DOM elements to cdData
-const initCdData = () => {
-  keys.forEach((key) => {
-    cdData[key].sect = document.getElementById(`cd-sect-${key}`);
-    cdData[key].num = document.getElementById(`cd-num-${key}`);
-    cdData[key].lab = document.getElementById(`cd-lab-${key}`);
-  });
-};
-
 const updateCountdown = () => {
+  // Define variables
   const now = new Date();
   let timeOffset = ezQuery().t - now.getTime();
   const time = timeFromMS(timeOffset);
+  // Update countdown clock
   keys.forEach(key => {
     try {
       if (time[key] || timeOffset > cdData[key]["ms"]) {
@@ -199,10 +210,15 @@ const updateCountdown = () => {
       return;
     }
   })
+  // Update ending text if necessary
+  if (timeOffset <= 1000) endSect.style.display = "initial";
+  else endSect.style.display = "none";
 };
 
 const endCountdown = () => {
+  // Cancel countdown tick
   countdown = null;
+  // Hide countdown numbers
   keys.forEach(key => {
     try {
         cdData[key]["sect"]["style"]["display"] = "none";
@@ -210,6 +226,8 @@ const endCountdown = () => {
       return;
     }
   })
+  // Show end text
+    endSect.style.display = "initial";
 }
 
 const handleToggleForm = (e) => {
@@ -252,8 +270,6 @@ let timeOffset = ezQuery().t - now.getTime();
 
 updateViewport();
 
-const formContainer = document.getElementById("cd-form-container");
-const floatingActionButton = document.getElementById("floating-action-button");
 floatingActionButton.addEventListener("click", handleToggleForm);
 
 formDate.addEventListener("change", updateFormValues);
