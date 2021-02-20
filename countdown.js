@@ -48,6 +48,9 @@ const timeFromMS = (ms) => {
   }
 };
 
+// Define now
+const now = new Date();
+
 // Data for DOM Elements
 const cdData = {
   years: {
@@ -107,9 +110,34 @@ const cdData = {
     plur: "seconds"
   },
 };
+
 // cdData keys for iteration
 const keys = Object.keys(cdData) || [];
 
+// Form values - defaults to 1 year in the future
+let formValues = {
+  year: now.getFullYear() + 1,
+  month: now.getMonth() + 1,
+  day: now.getDate(),
+  hour: now.getHours(),
+  min: now.getMinutes()
+}
+console.log(formValues);
+
+// Change handler for form inputs - store to varaibles
+const updateFormValues = (e) => {
+  console.log(e);
+  try {
+    const [year, month, day] = formDate.value.split("-");
+    const [hour, min] = formTime.value.split(":");
+    formValues = { year: year || formValues.year, month: month || formValues.month, day: day || formValues.day, hour: hour || formValues.hour, min: min || formValues.min };
+    console.log(formValues)
+  } catch(err) {
+    console.error(err);
+  }
+};
+
+// Assign DOM elements to cdData
 const initCdData = () => {
   keys.forEach((key) => {
     cdData[key].sect = document.getElementById(`cd-sect-${key}`);
@@ -154,7 +182,6 @@ const handleToggleForm = (e) => {
 
 initCdData();
 
-const now = new Date();
 // MS UTC
 console.log(now.getTime());
 console.log(new Date(now.getTime()));
@@ -183,6 +210,10 @@ updateViewport();
 const formContainer = document.getElementById("cd-form-container");
 const floatingActionButton = document.getElementById("floating-action-button");
 floatingActionButton.addEventListener("click", handleToggleForm);
+const formDate = document.getElementById("cd-form-date");
+const formTime = document.getElementById("cd-form-time");
+formDate.addEventListener("change", updateFormValues);
+formTime.addEventListener("change", updateFormValues);
 
 updateCountdown();
 
