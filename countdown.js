@@ -1,3 +1,7 @@
+// Variables - global scope
+let countdownActive = false;
+let countdown;
+
 // Queries
 const ezQuery = () => {
   // Get URL query
@@ -29,6 +33,35 @@ const updateViewport = () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 };
+
+const validateQuery = () => {
+  return new Promise((resolve, reject) => {
+    if (ezQuery().hasOwnProperty("t")) {
+      try {
+        // Test query is integer
+        let _qInt = parseInt(exQuery().t);
+        // Is query in the future?
+        const now = new Date().getTime();
+        if (ezQuery().t - now > 0) {
+          // Time is valid and in the future - resolve with timestamp
+          countdownActive = true;
+          resolve({targetDate: ezQuery().t})
+        } else {
+          // Time is valid but is in the past - resolve with zero
+          resolve({targetDate: 0})
+        }
+      } catch(e) {
+        // Error - Reject
+        countdownActive = false;
+        reject(null)
+      }
+
+    } else {
+      countdownActive = false;
+      reject(null);
+    }
+  })
+}
 
 // Assemble time object from MS
 const timeFromMS = (ms) => {
@@ -133,6 +166,7 @@ const formFeedback = document.getElementById("cd-form-feedback");
 const endSect = document.getElementById("cd-sect-end");
 const endText = document.getElementById("cd-num-end");
 const endLab = document.getElementById("cd-lab-end");
+const debugLink = document.getElementById("debug-link-cd");
 
 // Assign DOM elements to cdData
 const initCdData = () => {
@@ -254,36 +288,45 @@ initCdData();
 // console.log(now.getTimezoneOffset());
 
 // On window load
-document.onLoad = (e) => {};
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("document loaded")
+    // Debug
+    debugLink.href = `/?t=${now.getTime() + 86400000}`
+    // Add listeners
+    floatingActionButton.addEventListener("click", handleToggleForm);
+    formDate.addEventListener("change", updateFormValues);
+    formTime.addEventListener("change", updateFormValues);
+    form.addEventListener("submit", handleFormSubmit)
 
-const testTime = now.getTime() + 86400000;
+    // Define VH units
+    updateViewport();
+
+    // Display countdown
+    updateCountdown();
+
+    if (ezQuery().hasOwnProperty("t")) {
+      countdown = setInterval(() => {
+        const now = new Date();
+        let timeOffset = ezQuery().t - now.getTime();
+        if (timeOffset > 0) updateCountdown();
+        else endCountdown();
+    }, 1000);
+    }
+    
+});
+
+// const testTime = now.getTime() + 86400000;
 // console.log(`Test time (MS): ${testTime}`);
-const transTestTime = timeFromMS(testTime);
+// const transTestTime = timeFromMS(testTime);
 // console.log(`Translated:`);
 // console.dir(transTestTime);
 
-const debugLink = document.getElementById("debug-link-cd");
-debugLink.href = `/?t=${now.getTime() + 86400000}`
 
 
-let timeOffset = ezQuery().t - now.getTime();
-
-updateViewport();
-
-floatingActionButton.addEventListener("click", handleToggleForm);
-
-formDate.addEventListener("change", updateFormValues);
-formTime.addEventListener("change", updateFormValues);
-form.addEventListener("submit", handleFormSubmit)
+// let timeOffset = ezQuery().t - now.getTime();
 
 
-updateCountdown();
 
-let countdown;
 
-countdown = setInterval(() => {
-    const now = new Date();
-    let timeOffset = ezQuery().t - now.getTime();
-    if (timeOffset > 0) updateCountdown();
-    else endCountdown();
-}, 1000);
+
+
