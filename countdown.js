@@ -1,6 +1,7 @@
 // Variables - global scope
 let countdownActive = false;
 let countdown;
+const now = new Date();
 
 // Queries
 const ezQuery = () => {
@@ -55,7 +56,6 @@ const validateQuery = () => {
         countdownActive = false;
         reject(null)
       }
-
     } else {
       countdownActive = false;
       reject(null);
@@ -80,9 +80,6 @@ const timeFromMS = (ms) => {
     console.error(e);
   }
 };
-
-// Define now
-const now = new Date();
 
 // Form values - defaults to 1 year in the future
 let formValues = {
@@ -277,26 +274,19 @@ const handleToggleForm = (e) => {
   }
 }
 
-initCdData();
-
-// MS UTC
-// console.log(now.getTime());
-// console.log(new Date(now.getTime()));
-// console.log(now.toLocaleTimeString());
-
-// Timezone offset in minutes
-// console.log(now.getTimezoneOffset());
-
 // On window load
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("document loaded")
     // Debug
-    debugLink.href = `/?t=${now.getTime() + 86400000}`
+    debugLink.href = `/?t=${now.getTime() + 86400000}`;
+
+    // Assign variables to countdown object
+    initCdData();
+
     // Add listeners
     floatingActionButton.addEventListener("click", handleToggleForm);
     formDate.addEventListener("change", updateFormValues);
     formTime.addEventListener("change", updateFormValues);
-    form.addEventListener("submit", handleFormSubmit)
+    form.addEventListener("submit", handleFormSubmit);
 
     // Define VH units
     updateViewport();
@@ -304,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Display countdown
     updateCountdown();
 
+    // Start countdown tick
     if (ezQuery().hasOwnProperty("t")) {
       countdown = setInterval(() => {
         const now = new Date();
@@ -314,16 +305,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
 });
-
-// const testTime = now.getTime() + 86400000;
-// console.log(`Test time (MS): ${testTime}`);
-// const transTestTime = timeFromMS(testTime);
-// console.log(`Translated:`);
-// console.dir(transTestTime);
-
-
-
-// let timeOffset = ezQuery().t - now.getTime();
 
 
 
