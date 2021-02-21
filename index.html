@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1 id="countdown-h1"></h1>
+    <h1 id="cd-h1"></h1>
+    <div style="position: absolute; top: 0; text-align: center;">
     <div>
       <a href="/" id="debug-link-home">Goto Home</a>
     </div>
     <div>
       <a href="#" id="debug-link-cd">Goto Test Countdown</a>
     </div>
+  </div>
     <div id="countdown-container">
       <section class="cd-sect" id="cd-sect-years">
         <div class="cd-num" id="cd-num-years">00</div>
@@ -49,16 +51,26 @@
       </section>
     </div>
     <footer>
-      <span>
+      
         <div id="cd-form-container">
           <form id="cd-form">
-            <input type="date" id="cd-form-date">
-            <input type="time" id="cd-form-time">
+            <div>
+              <label class="cd-form-lab" for="cd-form-date">
+                date
+              </label>
+                <input type="date" class="cd-form-input" id="cd-form-date">
+            </div>
+            <div>
+              <label class="cd-form-lab" for="cd-form-time">
+                time
+              </label>
+                <input type="time" class="cd-form-input" id="cd-form-time">
+            </div>
             <input value="Go" type="submit">
             <div id="cd-form-feedback"></div>
           </form>
         </div>
-      </span>
+      
   </footer>
   <button class="cd-form-toggle" id="floating-action-button">+</button>
 
