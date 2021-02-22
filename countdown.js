@@ -66,8 +66,12 @@ const validateQuery = () => {
 // Assemble time object from MS
 const timeFromMS = (ms) => {
   try {
-    let weeks = Math.floor(ms / cdData.weeks.ms);
-    let weeksRem = ms % cdData.weeks.ms;
+    let years = Math.floor(ms / cdData.years.ms);
+    let yearsRem = ms % cdData.years.ms;
+    let months = Math.floor(yearsRem / cdData.months.ms);
+    let monthsRem = yearsRem % cdData.months.ms;
+    let weeks = Math.floor(monthsRem / cdData.weeks.ms);
+    let weeksRem = monthsRem % cdData.weeks.ms;
     let days = Math.floor(weeksRem / cdData.days.ms);
     let daysRem = weeksRem % cdData.days.ms;
     let hours = Math.floor(daysRem / cdData.hours.ms);
@@ -75,7 +79,7 @@ const timeFromMS = (ms) => {
     let mins = Math.floor(hoursRem / cdData.mins.ms);
     let minsRem = hoursRem % cdData.mins.ms;
     let secs = Math.floor(minsRem / cdData.secs.ms);
-    return { weeks, days, hours, mins, secs };
+    return { years, months, weeks, days, hours, mins, secs };
   } catch (e) {
     console.error(e);
   }
