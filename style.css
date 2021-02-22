@@ -103,13 +103,10 @@ body {
   overflow: hidden;
 }
 body {
-  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  /* width: 100vw; */
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   color: #222222;
@@ -383,16 +380,24 @@ button[disabled] {
 
 /* - - - - - - - - - - Page Structure - - - - - - - - - - */
 header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 footer {
-  position: fixed;
-  /* width: calc(100vw - 2rem); */
+  position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  /* padding: 1rem; */
+  padding: 1rem;
   display: flex;
   justify-content: flex-end;
+  height: fit-content;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-0);
 }
 section {
 }
@@ -400,11 +405,15 @@ article {
 }
 
 /* - - - - - - - - - - Custom Classes - - - - - - - - - - */
+.header-button {
+}
 #cd-h1 {
   display: none;
 }
 #countdown-container {
   width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 .cd-num {
   font-size: 3rem;
@@ -426,16 +435,11 @@ article {
 }
 div#cd-form-container {
   height: 0;
-  transition: all 0.3s ease;
+  transition: height 0.3s ease;
   overflow-y: hidden;
   display: block;
-  padding: 1rem;
-  padding-left: 5em;
-  background-color: var(--color-0);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  padding-left: 4rem;
+  width: 100%;
 }
 #cd-form > div {
   display: flex;
@@ -451,7 +455,7 @@ div#cd-form-container {
   display: none;
 }
 #floating-action-button {
-  position: fixed;
+  position: absolute;
   left: 1rem;
   bottom: 1rem;
   background: none;
