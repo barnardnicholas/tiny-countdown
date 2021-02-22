@@ -419,12 +419,11 @@ article {
   font-size: 3rem;
   font-weight: 800;
   line-height: 1em;
+  font-family: "Force Majeure", Arial, sans-serif;
 }
 .cd-lab {
   line-height: 1em;
-}
-.cd-num {
-  font-family: "Force Majeure", Arial, sans-serif;
+  margin-bottom: 0.3em;
 }
 #cd-sect-end {
   display: none;
