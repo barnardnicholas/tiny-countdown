@@ -232,7 +232,7 @@ const updateCountdown = () => {
       if (time[key] || timeOffset > cdData[key]["ms"]) {
         cdData[key]["sect"]["style"]["display"] = "initial";
         cdData[key]["num"]["innerText"] = time[key];
-        if (time[key] > 1) cdData[key]["lab"]["innerText"] = cdData[key]["plur"];
+        if (time[key] !== 1) cdData[key]["lab"]["innerText"] = cdData[key]["plur"];
         else cdData[key]["lab"]["innerText"] = cdData[key]["sing"];
       } else {
         cdData[key]["sect"]["style"]["display"] = "none";
