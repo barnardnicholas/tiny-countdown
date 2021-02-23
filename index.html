@@ -8,10 +8,10 @@
   </head>
   <body>
     <header>
-      <button class="header-button" id="header-button-info">i</button>
-      <button class="header-button" id="header-button-share">^</button>
+      <button class="header-button" id="header-button-info"></button>
+      <button class="header-button" id="header-button-share"></button>
     </header>
-    <h1 id="cd-h1"></h1>
+    <h1 id="cd-h1">tiny countdown</h1>
     <div style="position: absolute; top: 0; text-align: center;">
       <div>
         <a href="/" id="debug-link-home">Goto Home</a>
@@ -21,6 +21,11 @@
       </div>
     </div>
     <div id="countdown-container">
+      <section class="cd-sect" id="cd-sect-title">
+        <!-- <img id="title" src="tc_title.svg" alt="tiny countdown logo" /> -->
+        <h1 id="title">tiny<br/>countdown</h1>
+        <div id="subtitle">a minimal web app by nick barnard</div>
+      </section>
       <section class="cd-sect" id="cd-sect-years">
         <div class="cd-num" id="cd-num-years">00</div>
         <div class="cd-lab" id="cd-lab-years">years</div>
@@ -54,7 +59,7 @@
         <div class="cd-lab" id="cd-lab-end">have a nice day!</div>
       </section>
     </div>
-    <footer>
+    <footer id="footer">
       
         <div id="cd-form-container">
           <form id="cd-form">
@@ -76,7 +81,7 @@
         </div>
       
   </footer>
-  <button class="cd-form-toggle" id="floating-action-button">+</button>
+  <button class="cd-form-toggle" id="floating-action-button"></button>
 
     <script type="text/javascript" src="countdown.js"></script>
   </body>

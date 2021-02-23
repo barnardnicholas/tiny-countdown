@@ -168,6 +168,8 @@ const endSect = document.getElementById("cd-sect-end");
 const endText = document.getElementById("cd-num-end");
 const endLab = document.getElementById("cd-lab-end");
 const debugLink = document.getElementById("debug-link-cd");
+const cdSectTitle = document.getElementById("cd-sect-title");
+const footer = document.getElementById("footer");
 
 // Assign DOM elements to cdData
 const initCdData = () => {
@@ -267,14 +269,16 @@ const endCountdown = () => {
 
 const handleToggleForm = (e) => {
   if (formContainer.classList.contains("toggle-on")) {
+    footer.style.padding = "0";
     formContainer.style.height = "0";
     formContainer.classList.remove("toggle-on")
-    floatingActionButton.innerText = "+"
+    // floatingActionButton.innerText = "+"
   }
   else {
-    formContainer.style.height = "unset"; 
+    footer.style.padding = "1rem";
+    formContainer.style.height = "unset";
     formContainer.classList.add("toggle-on")
-    floatingActionButton.innerText = "-"
+    // floatingActionButton.innerText = "-"
   }
 }
 
@@ -298,14 +302,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Display countdown
     updateCountdown();
 
-    // Start countdown tick
+    // Start countdown tick, show/hide title if necessary
     if (ezQuery().hasOwnProperty("t")) {
+      // Show/hide title if necessary
+      cdSectTitle.style.display = "none"
       countdown = setInterval(() => {
         const now = new Date();
         let timeOffset = ezQuery().t - now.getTime();
         if (timeOffset > 0) updateCountdown();
         else endCountdown();
     }, 1000);
+    } else {
+      cdSectTitle.style.display = "initial"
     }
     
 });
